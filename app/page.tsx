@@ -1,9 +1,21 @@
-import React from 'react'
+import Hero from "./component/Hero/Hero";
+import HomeAboutSection from "./component/HomeAboutSection/HomeAboutSection";
+import HomeCategoriesSection from "./component/HomeCategoriesSection/HomeCategoriesSection";
+import HomeContactSection from "./component/HomeContactSection/HomeContactSection";
+import HomeServicesSection from "./component/HomeServicesSection/HomeServicesSection";
 
-const page = () => {
+function Home() {
+
+
   return (
-    <div>page</div>
-  )
+    <div>
+      <Hero />
+      <HomeAboutSection />
+      <HomeCategoriesSection />
+      <HomeServicesSection />
+      <HomeContactSection />
+    </div>
+  );
 }
 
-export default page
+export default Home
