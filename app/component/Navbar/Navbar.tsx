@@ -6,6 +6,7 @@ import { FiMenu, FiShoppingCart, FiUser, FiX } from 'react-icons/fi'
 import { useRouter } from 'next/navigation'
 import { useCart } from "@/app/context/CartContext";
 import SearchBar from '../../search/SearchBar'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 const Navbar = () => {
     const theme = themeColors.dark;
@@ -13,6 +14,12 @@ const Navbar = () => {
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const router = useRouter();
     const { cart } = useCart();
+    const { data: session, status } = useSession();
+
+    if (status === "loading") {
+        return <p>Loading...</p>;
+    }
+
 
     const categories = [
         { name: "Men", slug: "men" },
@@ -63,8 +70,21 @@ const Navbar = () => {
                 <div className="hidden lg:block w-48 sm:w-60 md:w-64">
                     <SearchBar />
                 </div>
+                {/* <FiUser /> */}
 
-                <FiUser size={24} className="cursor-pointer " />
+                {session ? (
+                    <>
+                        <p>Welcome, {session.user?.name}</p>
+                        <button onClick={() => signOut({ callbackUrl: "/" })} className="px-3 py-1 bg-red-600 rounded">
+                            Logout
+                        </button>
+                    </>
+                ) : (
+                    <button onClick={() => signIn("google", { callbackUrl: "/" })} className="px-3 py-1 bg-blue-600 rounded flex items-center gap-1">
+                        <FiUser /> Continue with Google
+                    </button>
+                )}
+
 
                 <div className="relative">
                     <FiShoppingCart

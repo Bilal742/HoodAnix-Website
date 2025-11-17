@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import allProducts from "@/app/data/products";
+import allProducts, { Product } from "@/app/data/products";
 import themeColors from "@/app/component/themeColor";
 import { useCart } from "../context/CartContext";
 
@@ -12,10 +12,11 @@ const SearchPage = () => {
 
   const { addToCart } = useCart();
 
-  const filteredProducts = allProducts.filter(
+  // Filter products safely
+  const filteredProducts: Product[] = allProducts.filter(
     (item) =>
       item.name.toLowerCase().includes(query) ||
-      item.category.toLowerCase().includes(query)
+      item.category?.toLowerCase().includes(query)
   );
 
   return (
@@ -24,9 +25,8 @@ const SearchPage = () => {
       className="min-h-screen p-6 pt-32"
     >
       <h1 className="text-3xl font-bold mb-6">
-        {query || "All Products"}
+        {query ? `Search results for "${query}"` : "All Products"}
       </h1>
-
 
       {filteredProducts.length === 0 ? (
         <p>No hoodies found.</p>
@@ -34,7 +34,7 @@ const SearchPage = () => {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
             <div
-              key={product.id + product.category}
+              key={product.id + (product.category ?? "unknown")}
               className="border p-4 rounded shadow hover:shadow-lg bg-white/10"
             >
               <img
@@ -45,14 +45,12 @@ const SearchPage = () => {
               <h2 className="font-semibold">{product.name}</h2>
               <p>{product.price}</p>
 
-              {/* FIX: yahan prod ki jagah product kar diya */}
               <button
                 className="mt-3 w-full bg-[rgb(20,55,70)] text-white py-2 rounded cursor-pointer"
                 onClick={() => addToCart(product)}
               >
                 Add to Cart
               </button>
-
             </div>
           ))}
         </div>
