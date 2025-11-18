@@ -1,10 +1,10 @@
 export interface Product {
     id: number;
     name: string;
-    category?: "men" | "women" | "unisex" | "new-arrivals" | "limited-edition";
-    price?: string;
-    image?: string;
-    heading?: string;
+    category: "men" | "women" | "unisex" | "new-arrivals" | "limited-edition";
+    price: string;
+    image: string;
+    heading: string;
 }
 
 const allProducts: Product[] = [
@@ -77,8 +77,18 @@ const allProducts: Product[] = [
 
 
     // limited-edition
-    { id: 313, name: "limited-edition-hoodies comming soon", },
-    
+    { id: 313, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg1.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 314, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg2.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 315, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg3.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 316, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg4.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 317, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg5.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 318, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg6.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 319, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg7.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 320, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg8.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 321, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg9.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 322, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg10.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 323, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg11.jpg", heading: "Explore our limited-edition Collection" },
+    { id: 324, name: "", category: "limited-edition", price: "$48", image: "/Limited_edition_Hoodies_Collections/bg12.jpg", heading: "Explore our limited-edition Collection" },
 
     //     // best-sellers
     //     { id: 5, name: "Unisex Hoodie 1", category: "best-sellers", price: "$48", image: "/Men_Hoodies_Collections/men12.jpg" },
