@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import allProducts from "@/app/data/products";
+import allProducts, { Product } from "@/app/data/products";
 import themeColors from "@/app/component/themeColor";
 
 const SearchBar = () => {
-  const [searchText, setSearchText] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [searchText, setSearchText] = useState<string>("");
+  const [suggestions, setSuggestions] = useState<Product[]>([]);
   const router = useRouter();
   const theme = themeColors.dark;
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchText(value);
 
@@ -27,9 +27,9 @@ const SearchBar = () => {
     setSuggestions(filtered);
   };
 
-  const handleSelect = (item) => {
+  const handleSelect = (item: Product) => {
     setSearchText("");
-    setSuggestions([]); 
+    setSuggestions([]);
     router.push(`/search?query=${encodeURIComponent(item.name)}`);
   };
 
