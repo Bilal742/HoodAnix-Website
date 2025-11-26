@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import themeColors from "@/app/component/themeColor";
 import { useCart } from "../context/CartContext";
 import { toast } from "react-hot-toast";
@@ -17,6 +18,7 @@ type CartItem = {
 
 const CartPage = () => {
     const theme = themeColors.dark;
+    const router = useRouter();
     const {
         cart,
         removeFromCart,
@@ -32,7 +34,6 @@ const CartPage = () => {
         applyDiscount,
         setDiscountApplied
     } = useCart();
-    const [shownToast, setShownToast] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [discountInput, setDiscountInput] = useState("");
 
@@ -230,10 +231,7 @@ const CartPage = () => {
                                 <div className="space-y-3">
                                     <button
                                         onClick={() => {
-                                            if (!shownToast) {
-                                                toast.success("Proceeding to checkout...");
-                                                setShownToast(true);
-                                            }
+                                            router.push("/checkout");
                                         }}
                                         className="w-full bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white font-semibold transition-colors cursor-pointer"
                                     >

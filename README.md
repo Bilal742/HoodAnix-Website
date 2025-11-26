@@ -3,7 +3,10 @@
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js&style=for-the-badge)
 ![React](https://img.shields.io/badge/React-18-blue?logo=react&style=for-the-badge)
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4-blue?logo=tailwind-css&style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue?logo=typescript&style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript&style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
 
 A **modern and responsive e-commerce application** built with **Next.js, React, Tailwind CSS**, featuring a clean UI and fast shopping experience — specially designed for premium hoodies.
 
@@ -11,7 +14,7 @@ A **modern and responsive e-commerce application** built with **Next.js, React, 
 
 ## 🌐 Live Demo
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Now-brightgreen?style=for-the-badge&logo=vercel)](your-vercel-link-here)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Now-brightgreen?style=for-the-badge&logo=vercel)](https://hood-anixx.vercel.app/)
 
 ---
 
@@ -42,22 +45,51 @@ A **modern and responsive e-commerce application** built with **Next.js, React, 
 
 ## 🖼️ Screenshots
 
-> Replace these links with your actual images.
-
 ### 🏠 Home Page
 ![Home](public/Img/ss.jpg)
 
 ### 🛍️ Product Listing
-![Products](https://your-image-link.com/products.png)
+![Products](public/Img/ss2.jpg)
 
 ### 🛒 Cart Page
-![Cart](https://your-image-link.com/cart.png)
+![Cart](public/Img/ss1.jpg)
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Setup Instructions
 
-### 1️⃣ Clone Repository
+1. **Clone the Repository:**
+   
+   ```bash
+   https://github.com/Bilal742/HoodAnix.git
+3. **Install Dependencies:**
+   
+   ```bash
+   npm install
+   or
+   yarn
+---
 
-```bash
-git clone https://github.com/your-username/hoodanix.git
+3. **Run the Development Server:**
+   
+   ```bash
+   npm run dev
+   or
+   yarn dev
+
+---
+
+4. **Open in Browser:**
+   
+   ```bash
+   Visit http://localhost:3000
+
+---   
+
+## 👨‍💻 Developer
+
+**Muhammad Bilal**  
+📧 [bilalusman1291@gmail.com](mailto:bilalusman1291@gmail.com)  
+🌐 [Portfolio](https://imuhammadbilal.vercel.app/)  
+🐙 [GitHub](https://github.com/Bilal742)
+

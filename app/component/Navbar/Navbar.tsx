@@ -12,6 +12,7 @@ const Navbar = () => {
     const theme = themeColors.dark;
     const [menuOpen, setMenuOpen] = useState(false);
     const [categoriesOpen, setCategoriesOpen] = useState(false);
+    const [userMenuOpen, setUserMenuOpen] = useState(false);
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const router = useRouter();
     const { cart } = useCart();
@@ -80,24 +81,54 @@ const Navbar = () => {
                     <SearchBar />
                 </div>
 
-                {session ? (
-                    <>
-                        <p>Welcome, {session.user?.name}</p>
-                        <button
-                            onClick={() => signOut({ callbackUrl: "/" })}
-                            className="px-3 py-1 bg-red-600 rounded cursor-pointer"
-                        >
-                            Logout
-                        </button>
-                    </>
-                ) : (
-                    <button
-                        onClick={() => signIn("google", { callbackUrl: "/" })}
-                        className="cursor-pointer"
-                    >
-                        <FiUser size={24} />
-                    </button>
-                )}
+                <div className="relative">
+                    {session ? (
+                        <div className="flex items-center gap-3">
+                            <p className="hidden sm:block">Welcome, {session.user?.name}</p>
+                            <button
+                                onClick={() => signOut({ callbackUrl: "/" })}
+                                className="px-3 py-1 bg-red-600 rounded cursor-pointer hover:bg-red-700 transition"
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    ) : (
+                        <>
+                            <button
+                                onClick={() => setUserMenuOpen(!userMenuOpen)}
+                                className="cursor-pointer relative"
+                            >
+                                <FiUser size={24} />
+                            </button>
+                            {userMenuOpen && (
+                                <div
+                                    style={{ background: theme.background }}
+                                    className="absolute top-full right-0 mt-2 w-56 p-2 shadow-lg rounded z-50 border border-white/10"
+                                    onMouseLeave={() => setUserMenuOpen(false)}
+                                >
+                                    <button
+                                        onClick={() => {
+                                            signIn("google", { callbackUrl: "/" });
+                                            setUserMenuOpen(false);
+                                        }}
+                                        className="w-full text-left px-4 py-2 hover:bg-white/10 rounded cursor-pointer transition mb-2"
+                                    >
+                                        Continue with Google
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            router.push("/auth");
+                                            setUserMenuOpen(false);
+                                        }}
+                                        className="w-full text-left px-4 py-2 hover:bg-white/10 rounded cursor-pointer transition"
+                                    >
+                                        Signup / Login
+                                    </button>
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
 
                 <div className="relative">
                     <FiShoppingCart
