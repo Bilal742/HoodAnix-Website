@@ -45,8 +45,6 @@ A **modern and responsive e-commerce application** built with **Next.js, React, 
 
 ## 🖼️ Screenshots
 
-> Replace these links with your actual images.
-
 ### 🏠 Home Page
 ![Home](public/Img/ss.jpg)
 
@@ -58,9 +56,40 @@ A **modern and responsive e-commerce application** built with **Next.js, React, 
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Setup Instructions
 
-### 1️⃣ Clone Repository
+1. **Clone the Repository:**
+   
+   ```bash
+   https://github.com/Bilal742/HoodAnix.git
+3. **Install Dependencies:**
+   
+   ```bash
+   npm install
+   or
+   yarn
+---
 
-```bash
-git clone https://github.com/your-username/hoodanix.git
+3. **Run the Development Server:**
+   
+   ```bash
+   npm run dev
+   or
+   yarn dev
+
+---
+
+4. **Open in Browser:**
+   
+   ```bash
+   Visit http://localhost:3000
+
+---   
+
+## 👨‍💻 Developer
+
+**Muhammad Bilal**  
+📧 [bilalusman1291@gmail.com](mailto:bilalusman1291@gmail.com)  
+🌐 [Portfolio](https://imuhammadbilal.vercel.app/)  
+🐙 [GitHub](https://github.com/Bilal742)
+
