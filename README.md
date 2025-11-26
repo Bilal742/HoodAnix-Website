@@ -1,61 +1,63 @@
-# 🛍️ HoodAnix - Premium Hoodie Store
+# 🛍️ HoodAnix – Premium Hoodie E-Commerce Store
 
-[![Website](https://img.shields.io/badge/Live-Demo-blue)](https://your-live-demo-link.com)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js&style=for-the-badge)
+![React](https://img.shields.io/badge/React-18-blue?logo=react&style=for-the-badge)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4-blue?logo=tailwind-css&style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-HoodAnix is a **modern, responsive e-commerce website** for premium hoodies. Built with **Next.js**, **React**, and **Tailwind CSS**, it features a **dynamic search bar, cart functionality, and smooth navigation**. Perfect for showcasing and selling hoodies online.
+A **modern and responsive e-commerce application** built with **Next.js, React, Tailwind CSS**, featuring a clean UI and fast shopping experience — specially designed for premium hoodies.
 
 ---
 
-## 🎯 Features 
+## 🌐 Live Demo
 
-- Fully responsive design for **desktop, tablet, and mobile**
-- **Dynamic Search** with instant suggestions and product filtering
-- **Category-wise product browsing** (Men, Women, Unisex)
-- **Shopping Cart** with add/remove/clear functionalities
-- **Smooth Navbar** with dropdown categories and mobile toggle
-- **Hero Slider** with auto-transition background images
-- **Contact Form** with toast notifications
-- Theme toggling support (light/dark ready)
-- Modern and clean UI with **Tailwind CSS** styling
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Now-brightgreen?style=for-the-badge&logo=vercel)](your-vercel-link-here)
+
+---
+
+## 🛠 Tech Stack
+
+| Technology | Use Case |
+|-----------|----------|
+| **Next.js 14** | App Router + SSR/CSR |
+| **React 18** | Component-based UI |
+| **Tailwind CSS** | Modern utility styling |
+| **Context API** | Cart state management |
+
+---
+
+## 🌟 Features
+
+| Feature | Description |
+|--------|-------------|
+| 🔍 **Real-time Search** | Live search with dynamic result filtering |
+| 🛒 **Cart System** | Add, remove, clear items using Context API |
+| 🧥 **Product Categories** | Men, Women, Unisex hoodie collections |
+| 📱 **Responsive Layout** | Fully optimized for mobile, tablet, desktop |
+| 🎚 **Hero Slider** | Auto-change sliding background |
+| 🎨 **Dark Theme Ready** | Theme-based color system |
+| 📩 **Contact Form** | Toast alerts + loading button |
 
 ---
 
 ## 🖼️ Screenshots
 
-### Home Page
+> Replace these links with your actual images.
+
+### 🏠 Home Page
 ![Home](https://your-image-link.com/home.png)
 
-### Product Page
+### 🛍️ Product Listing
 ![Products](https://your-image-link.com/products.png)
 
-### Cart Page
+### 🛒 Cart Page
 ![Cart](https://your-image-link.com/cart.png)
 
-### Contact Section
-![Contact](https://your-image-link.com/contact.png)
-
 ---
 
-## ⚡ Tech Stack
+## ⚙️ Installation & Setup
 
-![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-blue?logo=react&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-blue?logo=tailwind-css&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-yellow?logo=javascript&logoColor=black)
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js v18+  
-- npm or yarn
-
-### Installation
+### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/hoodanix.git
-cd hoodanix
-npm install
+git clone https://github.com/your-username/hoodanix.git
