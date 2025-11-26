@@ -48,10 +48,10 @@ A **modern and responsive e-commerce application** built with **Next.js, React, 
 ![Home](public/Img/ss.jpg)
 
 ### 🛍️ Product Listing
-![Products](https://your-image-link.com/products.png)
+![Products](public/Img/ss2.jpg)
 
 ### 🛒 Cart Page
-![Cart](https://your-image-link.com/cart.png)
+![Cart](public/Img/ss1.jpg)
 
 ---
 
