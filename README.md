@@ -45,7 +45,7 @@ A **modern and responsive e-commerce application** built with **Next.js, React, 
 > Replace these links with your actual images.
 
 ### 🏠 Home Page
-![Home](https://your-image-link.com/home.png)
+![Home](public/Img/ss.jpg)
 
 ### 🛍️ Product Listing
 ![Products](https://your-image-link.com/products.png)

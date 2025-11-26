@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
             ...prev,
             { ...product, cartId: Date.now() + Math.random() }
         ]);
-    };
+    }; 
 
     const removeFromCart = (cartId) => {
         setCart((prev) => prev.filter((item) => item.cartId !== cartId));
