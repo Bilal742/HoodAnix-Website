@@ -6,11 +6,15 @@ import { useCart } from "../context/CartContext";
 import themeColors from "@/app/component/themeColor";
 import { toast } from "react-hot-toast";
 import { FiShoppingBag } from "react-icons/fi";
+import { useSession } from "next-auth/react";
 
 const CheckoutPage = () => {
     const theme = themeColors.dark;
     const router = useRouter();
     const { cart, totalPrice, subtotal, discountAmount, discountApplied } = useCart();
+    const { data: session, status } = useSession();
+
+    if (status === "loading") return null;
 
     const [formData, setFormData] = useState({
         email: "",
@@ -31,23 +35,39 @@ const CheckoutPage = () => {
     const [selectedShipping, setSelectedShipping] = useState("");
     const [selectedPayment, setSelectedPayment] = useState("");
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    ) => {
         const { name, value, type } = e.target;
         const checked = (e.target as HTMLInputElement).checked;
-        
+
         setFormData((prev) => ({
             ...prev,
             [name]: type === "checkbox" ? checked : value,
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        
-        // Validation
-        if (!formData.email || !formData.firstName || !formData.lastName || 
-            !formData.streetAddress || !formData.city || !formData.zipCode || 
-            !formData.phoneNumber) {
+    // Payment button logic
+    const handlePayment = async () => {
+        // Check if user is logged in
+        if (!session) {
+            toast.error("Please login first!");
+            router.push("/auth");
+            return;
+        }
+
+        // Form validation
+        const {
+            email,
+            firstName,
+            lastName,
+            streetAddress,
+            city,
+            zipCode,
+            phoneNumber,
+        } = formData;
+
+        if (!email || !firstName || !lastName || !streetAddress || !city || !zipCode || !phoneNumber) {
             toast.error("Please fill in all required fields");
             return;
         }
@@ -62,8 +82,14 @@ const CheckoutPage = () => {
             return;
         }
 
-        toast.success("Order placed successfully!");
-        router.push("/");
+        // Proceed with payment
+        toast.loading("Processing payment...");
+
+        setTimeout(() => {
+            toast.dismiss();
+            toast.success("Order Created Successfully!");
+            router.push("/"); // redirect after successful order
+        }, 1500);
     };
 
     if (cart.length === 0) {
@@ -96,25 +122,26 @@ const CheckoutPage = () => {
                 </h1>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Checkout Form */}
                     <div className="lg:col-span-2 space-y-8">
-                        <form onSubmit={handleSubmit} className="space-y-8">
-                            {/* Contact Details */}
+                        <div className="space-y-8">
+                            {/* Contact & Shipping Form */}
                             <div className="bg-white/5 border border-white/10 rounded-lg p-6">
                                 <h2 className="text-2xl font-bold mb-6">Contact details</h2>
-                                
-                                <div className="mb-4">
-                                    <p className="text-sm mb-4">
-                                        Already have an account?{" "}
-                                        <button
-                                            type="button"
-                                            className="text-green-400 hover:underline cursor-pointer"
-                                            onClick={() => router.push("/auth")}
-                                        >
-                                            Sign in
-                                        </button>
-                                    </p>
-                                </div>
+
+                                {!session && (
+                                    <div className="mb-4">
+                                        <p className="text-sm mb-4">
+                                            Already have an account?{" "}
+                                            <button
+                                                type="button"
+                                                className="text-green-400 hover:underline cursor-pointer"
+                                                onClick={() => router.push("/auth")}
+                                            >
+                                                Sign in
+                                            </button>
+                                        </p>
+                                    </div>
+                                )}
 
                                 <div className="mb-4">
                                     <label className="block text-sm font-medium mb-2">
@@ -198,21 +225,7 @@ const CheckoutPage = () => {
                                 </div>
 
                                 <div className="mb-4">
-                                    <label className="block text-sm font-medium mb-2">Company</label>
-                                    <input
-                                        type="text"
-                                        name="company"
-                                        value={formData.company}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        placeholder="Company name (optional)"
-                                    />
-                                </div>
-
-                                <div className="mb-4">
-                                    <label className="block text-sm font-medium mb-2">
-                                        Street address <span className="text-red-400">*</span>
-                                    </label>
+                                    <label className="block text-sm font-medium mb-2">Street address <span className="text-red-400">*</span></label>
                                     <input
                                         type="text"
                                         name="streetAddress"
@@ -226,58 +239,31 @@ const CheckoutPage = () => {
 
                                 <div className="mb-4">
                                     <label className="block text-sm font-medium mb-2">
-                                        Street address (continue)
+                                        City <span className="text-red-400">*</span>
                                     </label>
                                     <input
                                         type="text"
-                                        name="streetAddress2"
-                                        value={formData.streetAddress2}
+                                        name="city"
+                                        value={formData.city}
                                         onChange={handleChange}
+                                        required
                                         className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        placeholder="Apartment, suite, unit, etc. (optional)"
+                                        placeholder="City"
                                     />
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">
-                                            City <span className="text-red-400">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="city"
-                                            value={formData.city}
-                                            onChange={handleChange}
-                                            required
-                                            className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                            placeholder="City"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">
-                                            Zip code <span className="text-red-400">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="zipCode"
-                                            value={formData.zipCode}
-                                            onChange={handleChange}
-                                            required
-                                            className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                            placeholder="Zip code"
-                                        />
-                                    </div>
-                                </div>
-
                                 <div className="mb-4">
-                                    <label className="block text-sm font-medium mb-2">State</label>
+                                    <label className="block text-sm font-medium mb-2">
+                                        Zip code <span className="text-red-400">*</span>
+                                    </label>
                                     <input
                                         type="text"
-                                        name="state"
-                                        value={formData.state}
+                                        name="zipCode"
+                                        value={formData.zipCode}
                                         onChange={handleChange}
+                                        required
                                         className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        placeholder="State"
+                                        placeholder="Zip code"
                                     />
                                 </div>
 
@@ -314,7 +300,7 @@ const CheckoutPage = () => {
                             {/* Delivery Methods */}
                             <div className="bg-white/5 border border-white/10 rounded-lg p-6">
                                 <h2 className="text-2xl font-bold mb-6">Delivery methods</h2>
-                                
+
                                 {formData.streetAddress && formData.city && formData.zipCode ? (
                                     <div className="space-y-3">
                                         <label className="flex items-center gap-3 p-4 border border-white/20 rounded cursor-pointer hover:bg-white/5">
@@ -370,7 +356,7 @@ const CheckoutPage = () => {
                             {/* Payment Methods */}
                             <div className="bg-white/5 border border-white/10 rounded-lg p-6">
                                 <h2 className="text-2xl font-bold mb-6">Payment methods</h2>
-                                
+
                                 <div className="space-y-3">
                                     <label className="flex items-center gap-3 p-4 border border-white/20 rounded cursor-pointer hover:bg-white/5">
                                         <input
@@ -408,20 +394,22 @@ const CheckoutPage = () => {
                                 </div>
                             </div>
 
+                            {/* Payment Button */}
                             <button
-                                type="submit"
+                                type="button"
                                 className="w-full bg-green-600 hover:bg-green-700 px-6 py-4 rounded-lg text-white font-semibold text-lg transition-colors cursor-pointer"
+                                onClick={handlePayment}
                             >
                                 Make payment and create order
                             </button>
-                        </form>
+                        </div>
                     </div>
 
-                    {/* Order Summary Sidebar */}
+                    {/* Order Summary */}
                     <div className="lg:col-span-1">
                         <div className="bg-white/5 border border-white/10 rounded-lg p-6 sticky top-24">
                             <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
-                            
+
                             <div className="space-y-4 mb-6">
                                 {cart.map((item: any) => (
                                     <div key={item.cartId} className="flex gap-3">
@@ -466,4 +454,3 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
-
