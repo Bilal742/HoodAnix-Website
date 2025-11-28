@@ -19,7 +19,7 @@ const HomeAboutSection = () => {
 
                     <div className="flex flex-wrap gap-8 mt-6">
                         <div className="flex flex-col ">
-                            <span className="text-3xl font-bold">50+</span>
+                            <span className="text-3xl font-bold">500+</span>
                             <span>Hoodies in Collection</span>
                         </div>
                         <div className="flex flex-col">
