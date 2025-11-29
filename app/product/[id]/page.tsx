@@ -1,32 +1,36 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, MouseEvent } from "react";
 import { useParams } from "next/navigation";
-import allProducts from "@/app/data/products";
+import allProducts, { Product } from "@/app/data/products";
 import { useCart } from "@/app/context/CartContext";
 import themeColors from "@/app/component/themeColor";
 
-const ProductDetailPage = () => {
+const ProductDetailPage: React.FC = () => {
   const theme = themeColors.dark;
-  const params = useParams();
+  const params = useParams() as { id: string };
   const { id } = params;
 
-  const product = allProducts.find((prod) => prod.id.toString() === id);
+  const product: Product | undefined = allProducts.find(
+    (prod) => prod.id.toString() === id
+  );
+
   const { addToCart } = useCart();
 
-  if (!product) return <p className="text-center mt-20 text-xl">Product not found!</p>;
+  if (!product)
+    return (
+      <p className="text-center mt-20 text-xl">Product not found!</p>
+    );
 
-  // Multiple images support
-  const images = product.images ?? [product.image];
+  const images: string[] = product.images ?? [product.image];
 
-  // 3D Effect states
-  const wrapperRef = useRef(null);
-  const [styleTransform, setStyleTransform] = useState(
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [styleTransform, setStyleTransform] = useState<string>(
     "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)"
   );
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const el = wrapperRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -49,12 +53,10 @@ const ProductDetailPage = () => {
     setStyleTransform("perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)");
   };
 
-  // Lightbox
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  // ⭐ Random Related Products (fixed on page load)
-  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const filtered = allProducts.filter(
@@ -74,8 +76,6 @@ const ProductDetailPage = () => {
       }}
     >
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 mt-20">
-
-        {/* LEFT: 3D Image */}
         <div className="md:w-1/2 flex flex-col gap-4">
           <div
             ref={wrapperRef}
@@ -103,8 +103,6 @@ const ProductDetailPage = () => {
                 transition: "transform 400ms",
               }}
             />
-
-            {/* gradient overlay */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
@@ -114,13 +112,14 @@ const ProductDetailPage = () => {
             />
           </div>
 
-          {/* Thumbnails */}
           <div className="flex gap-3 mt-3 justify-center">
             {images.map((src, index) => (
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`rounded-md overflow-hidden border ${index === activeIndex ? "border-[rgb(20,55,70)]" : "border-gray-600"
+                className={`rounded-md overflow-hidden border ${index === activeIndex
+                    ? "border-[rgb(20,55,70)]"
+                    : "border-gray-600"
                   }`}
                 style={{ width: 70, height: 70 }}
               >
@@ -130,7 +129,6 @@ const ProductDetailPage = () => {
           </div>
         </div>
 
-        {/* RIGHT: Details */}
         <div className="md:w-1/2 flex flex-col justify-center gap-4">
           <h1 className="text-3xl font-bold">{product.name}</h1>
           <p className="text-[rgb(20,55,70)]">{product.description}</p>
@@ -145,10 +143,8 @@ const ProductDetailPage = () => {
         </div>
       </div>
 
-      {/* Related Products */}
       <div className="max-w-6xl mx-auto mt-16">
         <h2 className="text-2xl font-bold mb-6">Related Products</h2>
-
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
           {relatedProducts.map((item) => (
             <div
@@ -167,12 +163,10 @@ const ProductDetailPage = () => {
         </div>
       </div>
 
-      {/* IMAGE MODAL */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
         >
-          {/* Close Button */}
           <button
             className="absolute top-4 right-4 text-white text-3xl font-bold z-50 hover:text-gray-300"
             onClick={() => setIsModalOpen(false)}
@@ -180,14 +174,12 @@ const ProductDetailPage = () => {
             &times;
           </button>
 
-          {/* Image */}
           <img
             src={images[activeIndex]}
             className="max-w-[90%] max-h-[90%] object-contain rounded shadow-lg"
           />
         </div>
       )}
-
     </div>
   );
 };

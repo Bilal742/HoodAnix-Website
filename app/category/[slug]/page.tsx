@@ -13,8 +13,7 @@ const CategoryPage = () => {
 
     const products = allProducts.filter(prod => prod.category === slug);
     // const { addToCart } = useCart();
-
-    const router = useRouter()
+    const router = useRouter();
 
 
     return (
