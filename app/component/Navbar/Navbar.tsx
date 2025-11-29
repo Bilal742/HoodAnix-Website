@@ -1,13 +1,12 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import themeColors from '../themeColor'
 import { FiMenu, FiShoppingCart, FiUser, FiX } from 'react-icons/fi'
 import { useRouter } from 'next/navigation'
 import { useCart } from "@/app/context/CartContext";
 import SearchBar from '@/app/component/SearchBar'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useEffect } from "react";
 import toast from 'react-hot-toast'
 
 const Navbar = () => {
@@ -15,7 +14,6 @@ const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [categoriesOpen, setCategoriesOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
-    const toggleMenu = () => setMenuOpen(!menuOpen);
     const router = useRouter();
     const { cart } = useCart();
     const { data: session, status } = useSession();
@@ -23,25 +21,18 @@ const Navbar = () => {
     useEffect(() => {
         if (status === "authenticated") {
             const shown = localStorage.getItem("welcome_shown");
-
             if (!shown) {
                 setTimeout(() => {
                     toast.success(`Welcome, ${session.user?.name}`);
-                }, 300); // thoda wait so session fully loaded
-
+                }, 300);
                 localStorage.setItem("welcome_shown", "true");
             }
         }
-
-        // logout hone par reset
         if (status === "unauthenticated") {
             localStorage.removeItem("welcome_shown");
         }
-
     }, [status, session]);
 
-
-    
     const totalItems = cart.reduce((total: number, item: any) => total + (item.quantity || 1), 0);
 
     const categories = [
@@ -68,12 +59,14 @@ const Navbar = () => {
             <ul className="hidden lg:flex gap-4 lg:gap-6 items-center">
                 <li className='cursor-pointer' onClick={() => router.push("/")}>Home</li>
                 <li className='cursor-pointer' onClick={() => router.push("/about")}>About</li>
-                <li 
+
+                <li
                     className="relative"
                     onMouseEnter={() => setCategoriesOpen(true)}
                     onMouseLeave={() => setCategoriesOpen(false)}
                 >
                     <span className="cursor-pointer">Categories ▼</span>
+
                     {categoriesOpen && (
                         <ul
                             style={{ background: theme.background }}
@@ -96,6 +89,7 @@ const Navbar = () => {
                         </ul>
                     )}
                 </li>
+
                 <li className='cursor-pointer' onClick={() => router.push("/shop")}>Shop</li>
                 <li className='cursor-pointer' onClick={() => router.push("/contact")}>Contact</li>
             </ul>
@@ -108,10 +102,9 @@ const Navbar = () => {
                 <div className="relative">
                     {session ? (
                         <div className="flex items-center gap-3">
-                            {/* <p className="hidden sm:block">Welcome, {session.user?.name}</p> */}
                             <button
                                 onClick={() => signOut({ callbackUrl: "/" })}
-                                className=" text-white px-3 py-1 bg-red-600 rounded cursor-pointer hover:bg-red-700 transition"
+                                className="text-white px-3 py-1 bg-red-600 rounded cursor-pointer hover:bg-red-700 transition"
                             >
                                 Logout
                             </button>
@@ -124,13 +117,14 @@ const Navbar = () => {
                             >
                                 <FiUser size={24} />
                             </button>
+
                             {userMenuOpen && (
                                 <div
                                     style={{ background: theme.background }}
                                     className="absolute top-full right-0 mt-2 w-56 p-2 shadow-lg rounded z-50 border border-white/10"
                                     onMouseLeave={() => setUserMenuOpen(false)}
                                 >
-                                    <button
+                                    {/* <button
                                         onClick={() => {
                                             signIn("google", { callbackUrl: "/" });
                                             setUserMenuOpen(false);
@@ -138,7 +132,8 @@ const Navbar = () => {
                                         className="w-full text-left px-4 py-2 hover:bg-white/10 rounded cursor-pointer transition mb-2"
                                     >
                                         Continue with Google
-                                    </button>
+                                    </button> */}
+
                                     <button
                                         onClick={() => {
                                             router.push("/auth");
@@ -167,7 +162,7 @@ const Navbar = () => {
                     )}
                 </div>
 
-                <div className="lg:hidden cursor-pointer" onClick={toggleMenu}>
+                <div className="lg:hidden cursor-pointer" onClick={() => setMenuOpen(!menuOpen)}>
                     {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                 </div>
             </div>
@@ -183,6 +178,7 @@ const Navbar = () => {
                     >
                         Home
                     </li>
+
                     <li
                         className='cursor-pointer py-1'
                         onClick={() => { router.push("/about"); setMenuOpen(false); }}
@@ -211,6 +207,7 @@ const Navbar = () => {
                     >
                         Shop
                     </li>
+
                     <li
                         className='cursor-pointer py-1'
                         onClick={() => { router.push("/contact"); setMenuOpen(false); }}
@@ -223,7 +220,6 @@ const Navbar = () => {
                     </div>
                 </ul>
             )}
-
         </nav>
     )
 }
