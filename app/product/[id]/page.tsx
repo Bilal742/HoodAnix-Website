@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect, MouseEvent } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import allProducts, { Product } from "@/app/data/products";
 import { useCart } from "@/app/context/CartContext";
 import themeColors from "@/app/component/themeColor";
@@ -10,6 +10,7 @@ const ProductDetailPage: React.FC = () => {
   const theme = themeColors.dark;
   const params = useParams() as { id: string };
   const { id } = params;
+  const router = useRouter();
 
   const product: Product | undefined = allProducts.find(
     (prod) => prod.id.toString() === id
@@ -150,7 +151,7 @@ const ProductDetailPage: React.FC = () => {
             <div
               key={item.id}
               className="border p-3 rounded shadow hover:shadow-xl cursor-pointer transition"
-              onClick={() => (window.location.href = `/product/${item.id}`)}
+              onClick={() => router.push(`/product/${item.id}`)}
             >
               <img
                 src={item.image}

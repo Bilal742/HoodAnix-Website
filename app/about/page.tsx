@@ -2,9 +2,11 @@
 
 import React from 'react'
 import themeColors from '../component/themeColor';
+import { useRouter } from 'next/navigation';
 
 const About = () => {
   const theme = themeColors.dark;
+  const router = useRouter();
 
   return (
     <section style={{ background: theme.background, color: theme.text }} className="min-h-96 flex flex-col items-center px-10 py-30">
@@ -33,7 +35,7 @@ const About = () => {
         </div>
       </div>
 
-      <button style={{ background: theme.text, color: theme.background }} className="mt-16 px-8 py-3 rounded font-semibold hover:bg-gray-200 transition cursor-pointer">
+      <button style={{ background: theme.text, color: theme.background }} className="mt-16 px-8 py-3 rounded font-semibold hover:bg-gray-200 transition cursor-pointer" onClick={() => router.push(`/shop`)}>
         Explore Our Collection
       </button>
     </section>
