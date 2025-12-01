@@ -7,7 +7,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript&style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
    
-
+ 
 A **modern and responsive e-commerce application** built with **Next.js, React, Tailwind CSS**, featuring a clean UI and fast shopping experience — specially designed for premium hoodies.
 
 ---
