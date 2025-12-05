@@ -1,35 +1,27 @@
-import mongoose from "mongoose";
+import { MongoClient } from "mongodb";
 
-export const connectDB = async () => {
-  if (mongoose.connections[0].readyState) return;
+const uri = process.env.MONGODB_URI!;
+const options = {};
 
-  try {
-    await mongoose.connect(process.env.MONGODB_URI || "");
-    console.log("MongoDB connected");
-  } catch (error) {
-    console.log("MongoDB Error:", error);
+let client: MongoClient;
+let clientPromise: Promise<MongoClient>;
+
+if (!process.env.MONGODB_URI) {
+  throw new Error("Please add MONGODB_URI to .env");
+}
+
+if (process.env.NODE_ENV === "development") {
+  // @ts-ignore
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri, options);
+    // @ts-ignore
+    global._mongoClientPromise = client.connect();
   }
-};
-  
+  // @ts-ignore
+  clientPromise = global._mongoClientPromise;
+} else {
+  client = new MongoClient(uri, options);
+  clientPromise = client.connect();
+}
 
-// import { MongoClient } from "mongodb";
-
-// if (!process.env.MONGODB_URI) {
-//   throw new Error("Please add your MONGODB_URI to .env");
-// }
-
-// let client: MongoClient;
-// let clientPromise: Promise<MongoClient>;
-
-// if (process.env.NODE_ENV === "development") {
-//   if (!(global as any)._mongoClientPromise) {
-//     client = new MongoClient(process.env.MONGODB_URI);
-//     (global as any)._mongoClientPromise = client.connect();
-//   }
-//   clientPromise = (global as any)._mongoClientPromise;
-// } else {
-//   client = new MongoClient(process.env.MONGODB_URI);
-//   clientPromise = client.connect();
-// }
-
-// export default clientPromise;
+export default clientPromise;
