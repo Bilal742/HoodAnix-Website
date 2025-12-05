@@ -76,10 +76,12 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import clientPromise from "@/lib/mongodb";
+import clientPromise from "@/app/lib/mongodb";
+// import { connectDB } from "@/app/lib/mongodb";
+
 import { compare } from "bcryptjs";
 
-const client = await clientPromise;
+const client = await clientPromise
 const db = client.db(process.env.MONGODB_DB);
 
 export const authOptions = {
