@@ -11,6 +11,10 @@ const AuthPage = () => {
     const theme = themeColors.dark;
     const router = useRouter();
     const [isLogin, setIsLogin] = useState(true);
+
+    // NEW STATE 🔥
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -28,13 +32,16 @@ const AuthPage = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        setLoading(true); // START LOADING 🔥
+
         if (isLogin) {
-            // ███████  LOGIN  ███████
             const res = await signIn("credentials", {
                 redirect: false,
                 email: formData.email,
                 password: formData.password,
             });
+
+            setLoading(false); // STOP LOADING
 
             if (res?.error) {
                 toast.error("Invalid email or password!");
@@ -44,13 +51,14 @@ const AuthPage = () => {
             }
 
         } else {
-            // ███████  SIGNUP  ███████
             if (formData.password !== formData.confirmPassword) {
                 toast.error("Passwords do not match!");
+                setLoading(false);
                 return;
             }
             if (formData.password.length < 6) {
                 toast.error("Password must be at least 6 characters!");
+                setLoading(false);
                 return;
             }
 
@@ -59,6 +67,8 @@ const AuthPage = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
             });
+
+            setLoading(false);
 
             if (res.ok) {
                 toast.success("Signup successful! Please login.");
@@ -92,16 +102,11 @@ const AuthPage = () => {
 
                     <button
                         onClick={handleGoogleSignIn}
-                        className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white text-gray-800 rounded-lg font-semibold hover:bg-gray-100 transition mb-6 cursor-pointer"
-                    >   
-                        <svg className="w-5 h-5" viewBox="0 0 24 24">
-                            <path fill="#4285F4" d="M22.5 12c0-.75-.07-1.48-.2-2.18H12v4.13h5.1c-.22 1.16-.88 2.14-1.88 2.8v2.33h3.04c1.78-1.64 2.8-4.05 2.8-6.88z" />
-                            <path fill="#34A853" d="M12 23c2.7 0 4.96-.9 6.62-2.44l-3.04-2.33c-.85.57-1.94.9-3.58.9-2.75 0-5.08-1.85-5.91-4.33H3.02v2.72C4.64 20.79 8.05 23 12 23z" />
-                            <path fill="#FBBC05" d="M6.11 14.8c-.2-.58-.32-1.2-.32-1.8s.12-1.22.32-1.8v-2.72H3.02C2.36 9.35 2 10.64 2 12s.36 2.65 1.02 3.72l3.09-2.92z" />
-                            <path fill="#EA4335" d="M12 4.96c1.47 0 2.77.5 3.8 1.48l2.84-2.84C16.95 2.12 14.7 1 12 1 8.05 1 4.64 3.21 3.02 6.28l3.09 2.72c.83-2.48 3.16-4.04 5.89-4.04z" />
-                            <path fill="none" d="M0 0h24v24H0z" />
-                        </svg>
-
+                        className={`w-full flex items-center justify-center gap-3 px-4 py-3 bg-white 
+                        text-gray-800 rounded-lg font-semibold transition mb-6 
+                       ${loading ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"}`}
+                        disabled={loading}
+                    >
                         Continue with Google
                     </button>
 
@@ -111,8 +116,8 @@ const AuthPage = () => {
                         <div className="flex-1 border-t border-white/20"></div>
                     </div>
 
-                    {/* FORM */}
                     <form onSubmit={handleSubmit} className="space-y-4">
+
                         {!isLogin && (
                             <div>
                                 <label className="block text-sm font-medium mb-2">Name</label>
@@ -183,9 +188,15 @@ const AuthPage = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white font-semibold transition"
+                            disabled={loading}
+                            className={`w-full bg-green-600 px-6 py-3 rounded-lg text-white font-semibold transition 
+                            ${loading ? "opacity-50 cursor-not-allowed" : "hover:bg-green-700"}`}
                         >
-                            {isLogin ? "Login" : "Sign Up"}
+                            {loading
+                                ? "Processing..."
+                                : isLogin
+                                ? "Login"
+                                : "Sign Up"}
                         </button>
                     </form>
 
@@ -209,7 +220,7 @@ const AuthPage = () => {
                         </p>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     );
 };
