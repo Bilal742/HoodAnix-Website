@@ -90,6 +90,6 @@ A **modern and responsive e-commerce application** built with **Next.js, React, 
 
 **Muhammad Bilal**  
 📧 [bilalusman1291@gmail.com](mailto:bilalusman1291@gmail.com)  
-🌐 [Portfolio](https://imuhammadbilal.vercel.app/)  
+🌐 [Portfolio](https://imuhammad-bilal.vercel.app/)  
 🐙 [GitHub](https://github.com/Bilal742)
 
