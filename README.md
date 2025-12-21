@@ -77,7 +77,7 @@ A **modern and responsive e-commerce application** built with **Next.js, React, 
    or
    yarn dev
 
----
+--- 
 
 4. **Open in Browser:**
    
