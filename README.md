@@ -15,7 +15,7 @@ A **modern and responsive e-commerce application** built with **Next.js, React, 
 ## 🌐 Live Demo
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Now-brightgreen?style=for-the-badge&logo=vercel)](https://hood-anixx.vercel.app/)
-
+ 
 ---
 
 ## 🛠 Tech Stack
