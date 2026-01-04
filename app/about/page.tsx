@@ -13,9 +13,9 @@ const About = () => {
       style={{ background: theme.background, color: theme.text }}
       className="min-h-[24rem] flex flex-col items-center px-10 py-30"
     >
-      <h1 className="text-5xl font-bold mb-6 text-center">About HoodAnix</h1>
+      <h1 className="text-3xl md:text-5xl font-bold mb-6 text-center">About HoodAnix</h1>
 
-      <p className="text-xl mb-12 text-center max-w-3xl">
+      <p className="md:text-xl text-1xl mb-12 text-center max-w-3xl">
         HoodAnix is a modern streetwear brand bringing stylish, high-quality hoodies to men, women, and unisex fashion lovers.
         We are passionate about creating urban, trendy designs with comfort and style in mind. Our hoodies are made from premium fabrics
         and crafted to keep you looking fresh while feeling comfortable. Join the HoodAnix community and embrace your urban lifestyle.

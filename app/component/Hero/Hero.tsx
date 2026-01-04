@@ -34,10 +34,10 @@ const Hero = () => {
             }}
             className="h-[500px] sm:h-[600px] md:h-[700px] flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-10 transition-all duration-1000 opacity-95"
         >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
                 Welcome to HoodAnix
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl mb-6 drop-shadow-lg max-w-2xl">
+            <p className="text-1xl sm:text-xl md:text-2xl mb-6 drop-shadow-lg max-w-2xl">
                 Discover the best hoodies for Men, Women, and Unisex
             </p>
             <button

@@ -11,8 +11,8 @@ const HomeAboutSection = () => {
             <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10">
 
                 <div className="lg:w-1/2 flex flex-col gap-6">
-                    <h2 className="text-4xl font-bold">Streetwear Redefined</h2>
-                    <p className="text-lg">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Streetwear Redefined</h2>
+                    <p className="text-1xl sm:text-1xl md:text-lg">
                         HoodAnix is a modern streetwear brand dedicated to providing high-quality, stylish hoodies for men, women, and unisex fashion enthusiasts.
                         Our hoodies combine comfort, premium fabrics, and trendy urban designs to make you look your best every day.
                     </p>

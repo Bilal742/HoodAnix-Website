@@ -80,7 +80,7 @@ const HomeContactSection = () => {
     <section style={{ background: theme.background, color: theme.text }} className="py-28 px-8">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 ">
         <div className="flex flex-col justify-center">
-          <h2 className="text-5xl font-bold leading-tight mb-6">
+          <h2 className="text-3xl sm:text-3xl md:text-5xl font-bold leading-tight mb-6">
             Let’s Talk
             <span className="block">with HoodAnix Team</span>
           </h2>
